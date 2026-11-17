@@ -1,0 +1,41 @@
+{
+  "playful_toys": {
+    "module_name": "Playful Toys & Text Games",
+    "file_path": "workspace/output/code/utilities/<gadget_name>.py",
+    "description": "Interactive text mini-games, cozy choose-your-own adventures, dice and coin rollers, ASCII toyboxes, trivia quizzes, and whimsical interactive games.",
+    "public_api": [
+      "Standard Python 3 libraries (random, time, textwrap, string)",
+      "Interactive terminal console (input(), print())",
+      "Cross-platform Windows & Linux compatible"
+    ],
+    "modifiable_targets": [
+      "New standalone, self-contained Python scripts in workspace/output/code/utilities/"
+    ]
+  },
+  "cozy_gadgets": {
+    "module_name": "Cozy Daily Gadgets",
+    "file_path": "workspace/output/code/utilities/<gadget_name>.py",
+    "description": "Comforting companion utilities: Pomodoro and focus timers, tea/coffee steep timers, gratitude prompt runners, habit checkpoints, and mindful breathing coaches.",
+    "public_api": [
+      "Standard Python 3 libraries (datetime, time, math, collections)",
+      "Clean interactive console menus",
+      "Cross-platform Windows & Linux compatible"
+    ],
+    "modifiable_targets": [
+      "New standalone, self-contained Python scripts in workspace/output/code/utilities/"
+    ]
+  },
+  "creative_sparks": {
+    "module_name": "Creative Sparks & Brainstormers",
+    "file_path": "workspace/output/code/utilities/<gadget_name>.py",
+    "description": "Procedural story starters, poetic prompt shufflers, character concept generators, worldbuilding randomizers, and playful decision-making wheels.",
+    "public_api": [
+      "Standard Python 3 libraries (random, string, json)",
+      "Instant procedural generation with optional interactive loops",
+      "Cross-platform Windows & Linux compatible"
+    ],
+    "modifiable_targets": [
+      "New standalone, self-contained Python scripts in workspace/output/code/utilities/"
+    ]
+  }
+}
