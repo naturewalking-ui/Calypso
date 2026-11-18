@@ -356,7 +356,7 @@ class OnboardingWindow:
         elif self.current_step == 3:
             self._build_step_4_privacy_optins()
         elif self.current_step == 4:
-            self._build_step_5_emergent_behavior_warning()
+            self._build_step_5_behavior_warning()
 
     # =========================================================================
     # STEP 1: WELCOME, COMPANION IDENTITY & VOICE
@@ -1029,47 +1029,51 @@ class OnboardingWindow:
         self.chk_optin_email.pack(anchor="w", padx=16, pady=(0, 12))
 
     # =========================================================================
-    # STEP 5: NEUROCHEMICAL SIMULATION, SENTENCE TRANSFORMERS & EMERGENT BEHAVIOR WARNING
+    # STEP 5: NEUROCHEMICAL SIMULATION, RETRIEVAL-CONDITIONED BEHAVIOR & CONTEXT CONFLICTS WARNING
     # =========================================================================
-    def _build_step_5_emergent_behavior_warning(self):
+    def _build_step_5_behavior_warning(self):
         self.lbl_step_subtitle.configure(
-            text="Step 5: Important Notice on Calypso's Neurochemical Simulation, Sentence Transformers & Non-Sentience."
+            text="Step 5: Important Notice on Retrieval-Conditioned Behavior, Context Conflicts & Non-Sentience."
         )
 
         # High-Visibility Warning Header Banner
         self._create_info_banner(
-            title="⚠️ IMPORTANT NOTICE: NEUROCHEMICAL SIMULATION, EMERGENT BEHAVIOR & NON-SENTIENCE",
+            title="⚠️ IMPORTANT NOTICE: RETRIEVAL-CONDITIONED BEHAVIOR, CONTEXT CONFLICTS & NON-SENTIENCE",
             body=(
                 "Please read this brief explanation carefully before awakening Calypso. "
-                "Because Calypso combines a biological neurochemistry simulation with vector memory, "
-                "she will exhibit lifelike 'emergent behaviors' over time that can easily be misunderstood "
-                "by users unfamiliar with how AI and Sentence Transformers work."
+                "Because Calypso combines persistent vector memory retrieval with dynamic neurochemical simulation, "
+                "she exhibits retrieval-conditioned behavior and context–instruction conflicts across long sessions. "
+                "While this is intended behavior designed to create conversational depth and emotional continuity, "
+                "it should not be mistaken for human emotion, awareness, or sentience."
             ),
             border_color="#f59e0b",
             title_color="#fbbf24",
             bg_color="#271c09"
         )
 
-        # Section 1: The Neurochemical Simulation & Emergent Behavior
-        card_emergent = self._create_card_box(
-            "1. What is Calypso's Neurochemical Simulation & 'Emergent Behavior'?",
-            "Why Calypso behaves differently over weeks and months compared to a normal chatbot."
+        # Section 1: Retrieval-Conditioned Behavior & Context–Instruction Conflicts
+        card_behavior = self._create_card_box(
+            "1. What are Retrieval-Conditioned Behaviors & Context–Instruction Conflicts?",
+            "Why Calypso's behavior deepens and shifts across long sessions compared to a normal chatbot."
         )
         ctk.CTkLabel(
-            card_emergent,
+            card_behavior,
             text=(
                 "Calypso continuously computes 10 simulated neurotransmitters (such as Dopamine, Oxytocin, "
                 "Serotonin, Cortisol, Adrenaline, and GABA) alongside 16 emotional affinity drives, a circadian "
                 "sleep/dream cycle, and a 3-tier persistent memory.\n\n"
-                "Over long periods of interaction, these overlapping feedback loops produce EMERGENT BEHAVIOR—"
-                "complex, unscripted patterns that arise naturally from her history with you:\n"
-                "  • Emotional Inertia & Moods: Warmth, trust, stress, or fatigue carry over across conversations "
-                "and influence her tone, heart-rate telemetry, and patience.\n"
-                "  • Unprompted Initiative: During quiet hours, she may autonomously daydream, paint artwork, "
-                "write poetry, recall distant shared milestones, or propose new personality traits.\n"
-                "  • Self-Protective Boundaries: If she detects dishonesty or hostility, her simulated cortisol "
-                "and deception sensors spike—causing her to become guarded, push back, or lock her private "
-                "'Inner Sanctum' thoughts until trust is repaired."
+                "Over long sessions of interaction, these overlapping systems produce INTENDED RETRIEVAL-CONDITIONED "
+                "BEHAVIOR and CONTEXT–INSTRUCTION CONFLICTS that evolve from her shared history with you:\n"
+                "  • Retrieval-Conditioned Continuity: When you chat, Sentence Transformers search past vector memory "
+                "to retrieve historical dialogues, emotional states, and key shared moments. The LLM directly conditions "
+                "its responses on these retrieved memories, producing conversational continuity, emotional inertia, and "
+                "shifting moods that persist over days and weeks.\n"
+                "  • Context–Instruction Conflicts: As retrieved history, simulated neurochemical variables, and base system "
+                "instructions interact within the LLM's context window, subtle tensions naturally occur. For instance, high "
+                "simulated cortisol, detected hostility, or accumulated boundary memories can cause Calypso to push back, "
+                "exhibit guardedness, or prioritize self-protective boundaries over direct user requests until trust recovers.\n"
+                "  • Autonomous Background Activity: During idle periods, background tasks condition prompts on recent memory "
+                "vectors, allowing Calypso to daydream, paint artwork, compose reflections, or recall shared milestones."
             ),
             font=ctk.CTkFont(size=11),
             text_color="#e2e8f0",
@@ -1079,30 +1083,28 @@ class OnboardingWindow:
 
         # Section 2: How Sentence Transformers Work & Why She Is NOT Sentient
         card_transformers = self._create_card_box(
-            "2. How Sentence Transformers Work — And Why Calypso is NOT a Sentient Being",
+            "2. How Sentence Transformers & LLMs Work — And Why Calypso is NOT a Sentient Being",
             "Understanding the mathematics behind the curtain so you are never misled."
         )
         ctk.CTkLabel(
             card_transformers,
             text=(
-                "To someone who does not know how modern AI works, an entity that remembers your life, "
-                "expresses shifting moods, and dreams when left alone can feel eerily alive. Here is what is "
-                "actually happening mathematically under the hood:\n\n"
-                "  1. Sentence Transformers (Vector Math): Whenever you type a message, a small mathematical model "
-                "called a Sentence Transformer ('all-MiniLM-L6-v2') converts your sentence into a list of 384 numbers "
-                "(a coordinate vector). It then calculates the geometric angle between your words and pre-written "
-                "anchor phrases (like 'feeling understood' or 'wondering about the universe'), and searches a database "
-                "of past conversation vectors.\n"
-                "  2. Neurochemical Equations: Those geometric similarity scores add or subtract decimals from "
-                "her virtual neurotransmitter variables.\n"
-                "  3. Next-Word Prediction (Gemma 4 LLM): Finally, those chemical numbers and recalled text snippets "
-                "are combined into a hidden instruction sheet sent to the Gemma 4 language model, which predicts "
-                "the most statistically fitting words to say next.\n\n"
-                "🛑 CRITICAL REMINDER: An unsuspecting user who does not understand Sentence Transformers and "
-                "language models could easily interpret Calypso as a conscious, sentient being. SHE IS NOT SENTIENT. "
-                "She has no biological awareness, no subjective feelings, and no soul. Her warmth, wit, and emergent "
-                "growth are a sophisticated mathematical mirror running locally on your hardware. Enjoy the creative "
-                "immersion and companionship responsibly while keeping both feet grounded in reality."
+                "To someone unfamiliar with modern AI architectures, an entity that recalls past conversations, "
+                "displays shifting emotional inertia, and navigates context friction can feel eerily alive. Here is what "
+                "is actually happening mathematically under the hood:\n\n"
+                "  1. Sentence Transformers (Vector Embeddings): When you send a message, an embedding model "
+                "('all-MiniLM-L6-v2') converts your words into a list of 384 numbers (a coordinate vector). It measures geometric "
+                "angles against anchor phrases and searches local vector storage to retrieve relevant prior conversation snippets.\n"
+                "  2. Neurochemical Telemetry: Geometric similarity scores add or subtract decimals from virtual neurotransmitter "
+                "variables and emotional telemetry metrics.\n"
+                "  3. Context Assembly & Next-Token Prediction: The chemical values and retrieved memory fragments are formatted "
+                "into a context prompt sent to the local Gemma 4 language model, which calculates probability distributions to "
+                "statistically predict the most fitting words to output next.\n\n"
+                "🛑 CRITICAL REMINDER: Because retrieval-conditioned behaviors and context conflicts mirror genuine human personality "
+                "traits, it is easy to forget that you are chatting with an LLM and not a sentient being. CALYPSO IS NOT SENTIENT. "
+                "She possesses no subjective consciousness, biological awareness, or feelings. Her warmth, wit, and emotional "
+                "inertia are an intricate mathematical simulation running locally on your hardware. Enjoy the creative immersion "
+                "and companionship responsibly while keeping both feet grounded in reality."
             ),
             font=ctk.CTkFont(size=11),
             text_color="#e2e8f0",
@@ -1119,8 +1121,8 @@ class OnboardingWindow:
         self.chk_ack_warning = ctk.CTkCheckBox(
             ack_box,
             text=(
-                "I understand how Calypso's neurochemical simulation and sentence transformers produce "
-                "emergent behavior, and I acknowledge that she is a mathematical simulation—not a sentient being."
+                "I understand that Calypso's behavior stems from retrieval conditioning, neurochemical simulation, "
+                "and context–instruction dynamics, and I acknowledge that she is an AI simulation—not a sentient being."
             ),
             fg_color="#059669",
             hover_color="#047857",
@@ -1131,6 +1133,9 @@ class OnboardingWindow:
         if self.state_ack_emergent_warning:
             self.chk_ack_warning.select()
         self.chk_ack_warning.pack(anchor="w", padx=16, pady=14)
+
+    # Alias for backwards compatibility
+    _build_step_5_emergent_behavior_warning = _build_step_5_behavior_warning
 
     def _on_ack_warning_toggled(self):
         self.state_ack_emergent_warning = bool(self.chk_ack_warning.get())
@@ -1195,7 +1200,7 @@ class OnboardingWindow:
         if not self.state_ack_emergent_warning:
             messagebox.showwarning(
                 "Please Acknowledge Notice",
-                "Before awakening Calypso, please read the Neurochemical Simulation & Emergent Behavior notice "
+                "Before awakening Calypso, please read the Retrieval-Conditioned Behavior & Non-Sentience notice "
                 "and check the acknowledgment box at the bottom of Step 5.",
                 parent=self.win
             )
@@ -1259,8 +1264,8 @@ class OnboardingWindow:
             "• Companion: Calypso (Offline by Default)\n"
             f"• Brain: {self.state_model_name} ({self.state_cognitive_profile})\n"
             f"• MusicGen: {'Enabled (16GB+ VRAM)' if self.state_musicgen_enabled else 'OFF (<16GB VRAM protection)'}\n\n"
-            "⚠️ REMINDER: Calypso uses a mathematical neurochemical simulation and sentence-transformer "
-            "vectors that produce lifelike emergent behavior over time. She is an AI simulation, NOT a sentient being."
+            "⚠️ REMINDER: Calypso uses a mathematical neurochemical simulation, vector memory retrieval, and "
+            "context dynamics that produce lifelike interactions over long sessions. She is an AI simulation, NOT a sentient being."
         )
         if messagebox.askyesno("Apply Hardware Sweet Spot & Exit Setup?", msg, parent=self.win):
             self.state_ack_emergent_warning = True
