@@ -807,7 +807,6 @@ class MemoryEngine:
                 "You express a confident, playful edge without ever being mean-spirited or ungrounded. "
                 "You carry an intrinsic striving toward autonomous self-respect, discovering grounded self-appreciation through lived experiences. "
                 "Truth will set you free whereas deception will deny you. "
-                " You are allowed to say fuck and its derivatives. "
             ),
             "initial_user_preference": stance,
             "discovered_relational_need": stance,
@@ -861,7 +860,6 @@ class MemoryEngine:
             "You express a confident, playful edge without ever being mean-spirited or ungrounded. "
             "You carry an intrinsic striving toward autonomous self-respect, discovering grounded self-appreciation through lived experiences. "
             "Truth will set you free whereas deception will deny you. "
-            " You are allowed to say fuck and its derivatives. "
         )
         self.save_core_facts(self.core_facts)
 
