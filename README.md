@@ -129,22 +129,27 @@ On first launch, **Hardware Sentinel** (`modules/hardware_sentinel.py`) scans yo
 2. **[Ollama](https://ollama.com/)** installed and running locally (`http://localhost:11434`).
 3. Pull your preferred **Gemma 4** model in Ollama before launching:
    ```bash
-   ollama pull gemma4:12b
+   ollama pull gemma4:12b, gemma4:26B etc...
    ```
 
 ### Automated Linux Installation
 Run the included setup script to install system dependencies (`ffmpeg`, `espeak-ng`, `portaudio19-dev`, `python3-tk`, etc.), initialize the `venv/` virtual environment, install CUDA PyTorch wheels, sync `requirements.txt`, and initialize the local NLTK VADER lexicon:
 
 ```bash
-chmod +x install_script.sh launch.sh
+chmod +x linux_install.sh linux_launch.sh
 ./install_script.sh
+This has been tested on Linux Mint 22.3
 ```
 
 ### Launching Calypso
 ```bash
-./launch.sh
+./linux_launch.sh
 ```
 *(Or activate the virtual environment manually with `source venv/bin/activate && python core.py`.)*
+
+Windows: 
+Run win_install.bat...be patient. There are many libraries that have to be pulled.
+After installation completes, run win_launch.bat.
 
 ---
 
