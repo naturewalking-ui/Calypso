@@ -11,7 +11,7 @@
 
 ## AI Usage for Coding Tasks
 
-AI was heavily used to complete this project. Initially this adventure began as a simple chatbot program to teach myself Python. The emotion engine itself is 70 percent my own work while the rest leaned heavily into AI tools for code generation. To put it simply, my skill as a programmer would never have allowed me finish this project without Google's AI studio.
+AI was heavily used to complete this project. Initially this adventure began as a simple chatbot program to teach myself Python. The emotion engine itself is 70 percent my own work while the rest leaned heavily into AI tools for code generation. To put it simply, my skill as a programmer would never have allowed me finish this project without Google's AI studio. That being said, this project has taken over six months to complete. I would like to keep working on new features so please consider sponsoring this project.
 
 ---
 
