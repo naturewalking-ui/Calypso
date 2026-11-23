@@ -3,6 +3,7 @@
 import json
 import logging
 import os
+import re
 import shutil
 import urllib.request
 from pathlib import Path
@@ -20,6 +21,7 @@ except ImportError:
     HAS_ODF = False
 
 from modules.config import config
+from modules.gpu_lock import gpu_vram_lock
 
 logger = logging.getLogger("Calypso.Documents")
 
@@ -101,25 +103,50 @@ class DocumentModule:
             f"DOCUMENT CONTENT:\n{text[:4500]}"
         )
 
+        base_url = str(config.OLLAMA_URL).rstrip("/")
+        if not base_url.endswith("/api/chat"):
+            chat_url = base_url + "/api/chat" if "/api/" not in base_url else base_url.rsplit("/api/", 1)[0] + "/api/chat"
+        else:
+            chat_url = base_url
+
         payload = {
             "model": config.MODEL_NAME,
             "messages": [{"role": "user", "content": prompt}],
             "stream": False,
+            "think": False,
             "options": {
                 "temperature": 0.2,
-                "num_predict": 300
+                "num_predict": 1024
             }
         }
 
         try:
             req = urllib.request.Request(
-                config.OLLAMA_URL,
+                chat_url,
                 data=json.dumps(payload).encode("utf-8"),
                 headers={"Content-Type": "application/json"}
             )
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-                return data.get("message", {}).get("content", "").strip()
+            with gpu_vram_lock:
+                with urllib.request.urlopen(req, timeout=90) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))
+
+            msg = data.get("message", {})
+            raw_content = msg.get("content", "").strip()
+
+            if "</think>" in raw_content.lower():
+                clean = re.sub(r"<think>.*?</think>", "", raw_content, flags=re.DOTALL | re.IGNORECASE).strip()
+            else:
+                clean = re.sub(r"<think>.*$", "", raw_content, flags=re.DOTALL | re.IGNORECASE).strip()
+            clean = re.sub(r"</?think>", "", clean, flags=re.IGNORECASE).strip()
+
+            if not clean and msg.get("thinking"):
+                clean = str(msg.get("thinking", "")).strip()
+
+            if not clean:
+                logger.warning(f"[Documents] Ollama returned an empty summary for '{filename}'. Falling back to snippet.")
+                return text[:400] + "..."
+
+            return clean
         except Exception as e:
             logger.warning(f"[Documents] Ollama summary failed: {e}. Fallback to snippet.")
             return text[:400] + "..."
