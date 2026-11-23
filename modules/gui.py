@@ -105,6 +105,7 @@ class GUIEngine(DeckCardsMixin):
         self.root.bind("<Control-E>", lambda e: self._toggle_input_expansion())
         self.root.bind("<Control-Shift-A>", lambda e: self._toggle_avatar_mode())
         self.root.bind("<Control-Shift-a>", lambda e: self._toggle_avatar_mode())
+        self.root.bind("<F1>", lambda e: self.open_help_window())
         
         # 3-Column Split
         self.root.columnconfigure(0, weight=0, minsize=532)
@@ -1472,9 +1473,6 @@ class GUIEngine(DeckCardsMixin):
         
         # 1. System & Security Menu
         system_menu = tk.Menu(menubar, tearoff=0, bg="#1a2030", fg="#f8fafc", activebackground="#2563eb")
-        system_menu.add_command(label="⚙️ Preferences & Settings... [Ctrl+,]", command=self.open_settings_modal)
-        system_menu.add_command(label="🐞 Diagnostic Console [Ctrl+Shift+D]", command=self.open_debugger)
-        system_menu.add_separator()
         system_menu.add_command(label="🔒 Lock Interface [Ctrl+L]", command=self.lock_screen)
         system_menu.add_separator()
         system_menu.add_command(label="Exit Interface", command=self.shutdown_callback)
@@ -1526,8 +1524,6 @@ class GUIEngine(DeckCardsMixin):
         audio_menu.add_command(label="🎵 Open Music Mini-Player", command=lambda: self.open_harmony_mini_player_card())
         audio_menu.add_command(label="🎤 Toggle Synced Lyrics Window", command=lambda: self.toggle_lyrics_window())
         audio_menu.add_command(label="🎶 Elicit Soul Resonance Track...", command=lambda: self.input_queue.put("/compose"))
-        audio_menu.add_separator()
-        audio_menu.add_command(label="⚙️ Configure Voices & Volume...", command=self.open_settings_modal)
         menubar.add_cascade(label="Audio", menu=audio_menu)
 
         # 4. Scenarios Menu
@@ -1585,7 +1581,68 @@ class GUIEngine(DeckCardsMixin):
             workspace_menu.add_command(label="📷 Process Staged Images", command=self._trigger_batch_images)
             menubar.add_cascade(label="Workspace", menu=workspace_menu)
 
+        # 8. Help & About Menu
+        help_menu = tk.Menu(menubar, tearoff=0, bg="#1a2030", fg="#f8fafc", activebackground="#2563eb")
+        help_menu.add_command(label="⚙️ Preferences & Settings... [Ctrl+,]", command=self.open_settings_modal)
+        help_menu.add_command(label="🐞 Diagnostic Console [Ctrl+Shift+D]", command=self.open_debugger)
+        help_menu.add_separator()
+        help_menu.add_command(
+            label="📖 User Manual & Architecture Guide... [F1]",
+            command=lambda: self.open_help_window("Welcome & Quick Start")
+        )
+        help_menu.add_command(
+            label="💻 Developer Slash Commands Reference...",
+            command=lambda: self.open_help_window("Developer Slash Commands")
+        )
+
+        slash_sub = tk.Menu(help_menu, tearoff=0, bg="#1a2030", fg="#f8fafc", activebackground="#2563eb")
+        slash_sub.add_command(label="🐞 /debug — Open Live Diagnostic HUD", command=lambda: self.input_queue.put("/debug"))
+        slash_sub.add_command(label="📋 /dump — Export Diagnostic Blackbox JSON", command=lambda: self.input_queue.put("/dump"))
+        slash_sub.add_separator()
+        slash_sub.add_command(label="📜 /poem — Elicit Autonomous Poem on Parchment", command=lambda: self.input_queue.put("/poem"))
+        slash_sub.add_command(label="🎶 /compose — Elicit Soul Resonance Music Track", command=lambda: self.input_queue.put("/compose"))
+        slash_sub.add_command(label="🏛️ /conclave — Surface Philosophical Conclave Card", command=lambda: self.input_queue.put("/conclave"))
+        slash_sub.add_command(label="🌿 /conclave end — Adjourn Active Conclave", command=lambda: self.input_queue.put("/conclave end"))
+        slash_sub.add_separator()
+        slash_sub.add_command(label="🛠️ /persona autonomous — Lock Autonomous Mode", command=lambda: self.input_queue.put("/persona autonomous"))
+        slash_sub.add_command(label="🤔 /persona thoughtful — Lock Thoughtful Mode", command=lambda: self.input_queue.put("/persona thoughtful"))
+        slash_sub.add_command(label="✨ /persona wonder — Lock Wonder Mode", command=lambda: self.input_queue.put("/persona wonder"))
+        slash_sub.add_command(label="⚖️ /persona satirical — Lock Satirical Mode", command=lambda: self.input_queue.put("/persona satirical"))
+        slash_sub.add_command(label="🔄 /persona reset — Restore Auto Homeostasis", command=lambda: self.input_queue.put("/persona reset"))
+        slash_sub.add_separator()
+        slash_sub.add_command(label="🎯 /goal checkin 25 — Force 25% Goal Check-in", command=lambda: self.input_queue.put("/goal checkin 25"))
+        slash_sub.add_command(label="🎯 /goal checkin 50 — Force 50% Goal Check-in", command=lambda: self.input_queue.put("/goal checkin 50"))
+        slash_sub.add_command(label="🎯 /goal checkin 75 — Force 75% Goal Check-in", command=lambda: self.input_queue.put("/goal checkin 75"))
+        slash_sub.add_command(label="🏁 /goal checkin 100 — Force 100% Goal Finale", command=lambda: self.input_queue.put("/goal checkin 100"))
+        slash_sub.add_separator()
+        slash_sub.add_command(label="📂 /scan all — Batch Scan Staged Docs & Photos", command=lambda: self.input_queue.put("/scan all"))
+        slash_sub.add_command(label="📖 /scrap_book — Open Digital Scrapbook Album", command=lambda: self.input_queue.put("/scrap_book"))
+        slash_sub.add_command(label="🖼️ /gallery — Open Borderless Image Gallery", command=lambda: self.input_queue.put("/gallery"))
+        slash_sub.add_command(label="🖥️ /slideshow — Start Borderless Slideshow", command=lambda: self.input_queue.put("/slideshow"))
+        help_menu.add_cascade(label="⚡ Quick Run Developer Slash Command", menu=slash_sub)
+
+        help_menu.add_command(
+            label="⌨️ Hotkeys & Display Shortcuts...",
+            command=lambda: self.open_help_window("Hotkeys & Shortcuts")
+        )
+        help_menu.add_separator()
+        help_menu.add_command(
+            label="⚠️ Safety & Non-Sentience Notice...",
+            command=lambda: self.open_help_window("Safety")
+        )
+        help_menu.add_command(
+            label="ℹ️ About Calypso & License...",
+            command=lambda: self.open_help_window("About & License")
+        )
+        menubar.add_cascade(label="Help", menu=help_menu)
+
         self.root.config(menu=menubar)
+
+    def open_help_window(self, initial_section: str = None):
+        """Opens or lifts the Help & Architecture Manual window at the requested section."""
+        if getattr(self, "_is_locked", False):
+            return
+        HelpWindow.show(self.root, initial_section=initial_section)
 
     def _trigger_send_test_email(self):
         """Dispatches a test email in a daemon thread using saved settings."""
@@ -1745,7 +1802,12 @@ class GUIEngine(DeckCardsMixin):
             
             def _doc_worker():
                 extracted = self.document_processor.extract_text(file_path)
+                if not extracted:
+                    self.append_system_notice(f"⚠️ [Documents]: Could not extract readable text from '{file_path.name}'.")
+                    return
                 summary = self.document_processor.generate_llm_summary(extracted, file_path.name)
+                summary_path = self.document_processor.save_summary(file_path.name, summary)
+                self.append_system_notice(f"✓ Summary saved: {summary_path.name}")
                 self.input_queue.put(
                     f"[System Notice: Your companion dropped a document '{file_path.name}'. "
                     f"Summary of document:\n{summary}\n"
