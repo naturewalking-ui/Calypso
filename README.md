@@ -1,5 +1,8 @@
-# Say hello to Calypso -
+# Say Hello to Calypso -
 **A Local-First, Multi-Modal Cognitive & Neurochemical Simulation Engine and Chatbot Companion**
+<img width="1254" height="1254" alt="calypso" src="https://github.com/user-attachments/assets/e48e16dd-8dea-4b83-8f0b-e585767ed646" />
+
+<p align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-38bdf8.svg)](https://www.python.org/)
