@@ -257,6 +257,7 @@ By default, **Calypso operates 100% offline**:
 - All LLM reasoning (Ollama), speech synthesis (Kokoro), voice transcription (Faster-Whisper), portrait animation (FasterLivePortrait), scene synthesis (SDXL), music generation (MusicGen), and vector memories (ChromaDB / SQLite) execute locally on your hardware.
 - **Zero telemetry, analytics, or external API calls** are ever made behind the scenes.
 - Optional online capabilities—**Autonomous Web Research**, **Hugging Face Model Downloads**, and **Gmail Correspondence**—are strictly **opt-in** (disabled by default) and can be toggled at any time in **Settings (⚙️)**.
+- Calypso works offline but may need to grab model weights on the first run! Please keep this in mind.
 
 ---
 
