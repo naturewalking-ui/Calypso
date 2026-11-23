@@ -65,6 +65,10 @@ flowchart TD
 - **Tier 2 — Episodic Vector Memory** (`memory.py`, `hippocampus.py`): Uses `sentence-transformers` (`all-MiniLM-L6-v2`) and local **ChromaDB** storage to encode and retrieve historical dialogues, emotional trajectories, dreams, and shared milestones.
 - **Tier 3 — SQLite Knowledge Graph & Reference Library** (`knowledgegraph.py`, `library_engine.py`): Extracts multi-hop entity relationships, manages the temporal calendar and personal goals ledger, and maintains an isolated Reference Library ChromaDB for user documents.
 
+### D. Autonomous Growth and Resonance
+- Calypso is not a static chatbot! She learns how you behave. If you become adversarial, she will defend herself. If you get stuck in a rut, she will try to cheer you up. Her personality is always evolving.
+- Calypso pays attention to your likes and interests and catalogs then for further exploration. If you have hobbies or just want to learn something new she will compliment and encourage your inquiry.
+- Calypso will about you and change over time, she will create new code to resonate with you. Depending how you interact. She will autonomously create new affinities that match your personality.
 ---
 
 ## 2. Multi-Modal Capabilities & Visual Interface
