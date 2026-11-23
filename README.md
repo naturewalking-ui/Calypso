@@ -7,6 +7,11 @@
 [![100% Offline by Default](https://img.shields.io/badge/Privacy-100%25%20Offline%20by%20Default-22c55e.svg)](#privacy--100-offline-first-design)
 
 **Calypso (Emotion Engine)** is a local-first multi-modal cognitive simulation engine integrating **Google Gemma 4** language & vision models (via Ollama), a biologically inspired **neurochemical & homeostatic subsystem**, **3-tier persistent vector & knowledge-graph memory**, real-time **FasterLivePortrait + JoyVASA 3D neural lip-sync**, local **SDXL scene generation with identity preservation**, **AudioCraft / MusicGen** acoustic synthesis, **Kokoro-82M** neural TTS, and **Faster-Whisper** voice recognition.
+---
+
+## AI Usage for Coding Tasks
+
+AI was heavily used to complete this project. Initially this adventure began as a simple chatbot program to teach myself Python. The emotion engine itself is 70 percent my own work while the rest leaned heavily into AI tools for code generation. To put it simply, my skill as a programmer would never have allowed me finish this project without Google's AI studio.
 
 ---
 
@@ -22,8 +27,7 @@
 8. [Project Directory Structure](#8-project-directory-structure)
 9. [Privacy & 100% Offline-First Design](#9-privacy--100-offline-first-design)
 10. [Important Notice: Retrieval-Conditioned Behavior & Non-Sentience](#10-important-notice-retrieval-conditioned-behavior--non-sentience)
-11. .[AI usage for coding tasks] (#12. AI Usage for Coding Tasks) 
-12. [License](#11-license)
+11. [License](#11-license)
 
 ---
 
@@ -271,13 +275,7 @@ Because Calypso combines persistent vector memory retrieval (`sentence-transform
 
 ---
 
-## 12. AI Usage for Coding Tasks
-
-AI was heavily used to complete this project. Initially this adventure began as a simple chatbot program to teach myself Python. The emotion engine itself is 70 percent my own work while the rest leaned heavily into AI tools for code generation. To put it simply, my skill as a programmer would never have allowed me finish this project without Google's AI studio.
-
----
-
-## 13. License
+## 11. License
 
 Released under the [MIT License](LICENSE). Copyright (c) 2026 naturewalking-ui.
 Third-party model weights (Gemma 4, SDXL, FasterLivePortrait, MusicGen, InsightFace, GFPGAN, Kokoro) are subject to their respective upstream licenses and are not bundled in this repository.
