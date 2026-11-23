@@ -1,8 +1,5 @@
 # Say Hello to Calypso -
 **A Local-First, Multi-Modal Cognitive & Neurochemical Simulation Engine and Chatbot Companion**
-<img width="1254" height="1254" alt="calypso" src="https://github.com/user-attachments/assets/e48e16dd-8dea-4b83-8f0b-e585767ed646" />
-
-<p align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-38bdf8.svg)](https://www.python.org/)
@@ -25,7 +22,8 @@
 8. [Project Directory Structure](#8-project-directory-structure)
 9. [Privacy & 100% Offline-First Design](#9-privacy--100-offline-first-design)
 10. [Important Notice: Retrieval-Conditioned Behavior & Non-Sentience](#10-important-notice-retrieval-conditioned-behavior--non-sentience)
-11. [License](#11-license)
+11. .[AI usage for coding tasks] (#12. AI Usage for Coding Tasks) 
+12. [License](#11-license)
 
 ---
 
@@ -273,7 +271,13 @@ Because Calypso combines persistent vector memory retrieval (`sentence-transform
 
 ---
 
-## 11. License
+## 12. AI Usage for Coding Tasks
+
+AI was heavily used to complete this project. Initially this adventure began as a simple chatbot program to teach myself Python. The emotion engine itself is 70 percent my own work while the rest leaned heavily into AI tools for code generation. To put it simply, my skill as a programmer would never have allowed me finish this project without Google's AI studio.
+
+---
+
+## 13. License
 
 Released under the [MIT License](LICENSE). Copyright (c) 2026 naturewalking-ui.
 Third-party model weights (Gemma 4, SDXL, FasterLivePortrait, MusicGen, InsightFace, GFPGAN, Kokoro) are subject to their respective upstream licenses and are not bundled in this repository.
