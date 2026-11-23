@@ -41,7 +41,7 @@ flowchart TD
     Sense --> Limbic["Limbic Relay & Neurochemistry (10 Neurotransmitters)"]
     Limbic --> Homeo["Homeostatic Gravity & Physiological Burnout Brakes"]
     Homeo --> Affinity["16 Semantic Affinity Drives & Relational Resonance"]
-    Affinity --> Persona["40+ Emotional Tiers & Immersion Commitments"]
+    Affinity --> Persona["26+ Emotional Tiers & Immersion Commitments"]
     User --> Mem["3-Tier Memory (Working, ChromaDB Episodic, SQLite Knowledge Graph)"]
     Persona --> Prompt["Dynamic Context & System Prompt Assembler"]
     Mem --> Prompt
@@ -54,7 +54,7 @@ flowchart TD
 - **Real-Time Biometric Telemetry** (`ekg_monitor.py`): Drives a live cardiac EKG waveform monitor whose BPM, heart-rate variability, and morphology respond dynamically to simulated catecholamine and cortisol levels.
 - **Self-Esteem & Epistemic Deception Filter** (`esteem.py`, `deception.py`): Evaluates relational trust, boundary integrity, and epistemic consistency.
 
-### B. 16 Affinity Drives, Relational Resonance & 40+ Personas
+### B. 16 Affinity Drives, Relational Resonance & 26+ Personas
 - **16 Semantic Affinity Drives** (`affinity.py`): Tracks vector-anchored drives including *Wonder, Autonomy, Harmony, Honesty, Romance, Curiosity, Humor, Nostalgia, Sarcasm,* and *Abyss*.
 - **Immersion Commitments** (`personas.py`): Crossing `0.69` intensity triggers a multi-turn immersion commitment into specialized personas, **Harmony Shared Music Listening**, or **Philosophical Conclaves**.
 - **Relational Resonance** (`relational_resonance.py`): Evaluates long-term interaction telemetry across 4 axes (*Friction, Power, Attachment,* and *Gravity*).
