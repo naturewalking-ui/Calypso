@@ -1,6 +1,5 @@
-# Calypso (Emotion Engine)
-
-**A Local-First, Multi-Modal Cognitive & Neurochemical Simulation Engine and Chatbot**
+# Say hello to Calypso -
+**A Local-First, Multi-Modal Cognitive & Neurochemical Simulation Engine and Chatbot Companion**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-38bdf8.svg)](https://www.python.org/)
