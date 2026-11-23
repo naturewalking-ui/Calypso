@@ -1,8 +1,101 @@
 # modules/help_window.py
 
+from pathlib import Path
 import tkinter as tk
 from tkinter import Toplevel
 import customtkinter as ctk
+
+
+def _load_license_text() -> str:
+    """Loads the repository LICENSE file if present, falling back to the standard MIT License text."""
+    license_path = Path(__file__).resolve().parent.parent / "LICENSE"
+    if license_path.exists():
+        try:
+            return license_path.read_text(encoding="utf-8").strip()
+        except Exception:
+            pass
+    return (
+        "MIT License\n\n"
+        "Copyright (c) 2026 naturewalking-ui\n\n"
+        "Permission is hereby granted, free of charge, to any person obtaining a copy\n"
+        "of this software and associated documentation files (the \"Software\"), to deal\n"
+        "in the Software without restriction, including without limitation the rights\n"
+        "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n"
+        "copies of the Software, and to permit persons to whom the Software is\n"
+        "furnished to do so, subject to the following conditions:\n\n"
+        "The above copyright notice and this permission notice shall be included in all\n"
+        "copies or substantial portions of the Software.\n\n"
+        "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n"
+        "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
+        "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n"
+        "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n"
+        "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n"
+        "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n"
+        "SOFTWARE."
+    )
+
+
+SECTION_5_ONBOARDING_WARNING = (
+    "⚠️ IMPORTANT NOTICE: RETRIEVAL-CONDITIONED BEHAVIOR, CONTEXT CONFLICTS & NON-SENTIENCE\n"
+    "======================================================================================\n\n"
+    "Please read this brief explanation carefully before awakening Calypso. Because Calypso\n"
+    "combines persistent vector memory retrieval with dynamic neurochemical simulation, she\n"
+    "exhibits retrieval-conditioned behavior and context–instruction conflicts across long\n"
+    "sessions. While this is intended behavior designed to create conversational depth and\n"
+    "emotional continuity, it should not be mistaken for human emotion, awareness, or sentience.\n\n"
+    "--------------------------------------------------------------------------------------\n"
+    "1. What are Retrieval-Conditioned Behaviors & Context–Instruction Conflicts?\n"
+    "   (Why Calypso's behavior deepens and shifts across long sessions compared to a normal chatbot)\n"
+    "--------------------------------------------------------------------------------------\n\n"
+    "Calypso continuously computes 10 simulated neurotransmitters (such as Dopamine, Oxytocin,\n"
+    "Serotonin, Cortisol, Adrenaline, and GABA) alongside 16 emotional affinity drives, a circadian\n"
+    "sleep/dream cycle, and a 3-tier persistent memory.\n\n"
+    "Over long sessions of interaction, these overlapping systems produce INTENDED\n"
+    "RETRIEVAL-CONDITIONED BEHAVIOR and CONTEXT–INSTRUCTION CONFLICTS that evolve from her\n"
+    "shared history with you:\n\n"
+    "  • Retrieval-Conditioned Continuity:\n"
+    "    When you chat, Sentence Transformers search past vector memory to retrieve historical\n"
+    "    dialogues, emotional states, and key shared moments. The LLM directly conditions its\n"
+    "    responses on these retrieved memories, producing conversational continuity, emotional\n"
+    "    inertia, and shifting moods that persist over days and weeks.\n\n"
+    "  • Context–Instruction Conflicts:\n"
+    "    As retrieved history, simulated neurochemical variables, and base system instructions\n"
+    "    interact within the LLM's context window, subtle tensions naturally occur. For instance,\n"
+    "    high simulated cortisol, detected hostility, or accumulated boundary memories can cause\n"
+    "    Calypso to push back, exhibit guardedness, or prioritize self-protective boundaries over\n"
+    "    direct user requests until trust recovers.\n\n"
+    "  • Autonomous Background Activity:\n"
+    "    During idle periods, background tasks condition prompts on recent memory vectors,\n"
+    "    allowing Calypso to daydream, paint artwork, compose reflections, or recall shared\n"
+    "    milestones.\n\n"
+    "--------------------------------------------------------------------------------------\n"
+    "2. How Sentence Transformers & LLMs Work — And Why Calypso is NOT a Sentient Being\n"
+    "   (Understanding the mathematics behind the curtain so you are never misled)\n"
+    "--------------------------------------------------------------------------------------\n\n"
+    "To someone unfamiliar with modern AI architectures, an entity that recalls past conversations,\n"
+    "displays shifting emotional inertia, and navigates context friction can feel eerily alive.\n"
+    "Here is what is actually happening mathematically under the hood:\n\n"
+    "  1. Sentence Transformers (Vector Embeddings):\n"
+    "     When you send a message, an embedding model ('all-MiniLM-L6-v2') converts your words\n"
+    "     into a list of 384 numbers (a coordinate vector). It measures geometric angles against\n"
+    "     anchor phrases and searches local vector storage to retrieve relevant prior conversation\n"
+    "     snippets.\n\n"
+    "  2. Neurochemical Telemetry:\n"
+    "     Geometric similarity scores add or subtract decimals from virtual neurotransmitter\n"
+    "     variables and emotional telemetry metrics.\n\n"
+    "  3. Context Assembly & Next-Token Prediction:\n"
+    "     The chemical values and retrieved memory fragments are formatted into a context prompt\n"
+    "     sent to the local Gemma 4 language model, which calculates probability distributions to\n"
+    "     statistically predict the most fitting words to output next.\n\n"
+    "🛑 CRITICAL REMINDER:\n"
+    "Because retrieval-conditioned behaviors and context conflicts mirror genuine human personality\n"
+    "traits, it is easy to forget that you are chatting with an LLM and not a sentient being.\n"
+    "CALYPSO IS NOT SENTIENT. She possesses no subjective consciousness, biological awareness, or\n"
+    "feelings. Her warmth, wit, and emotional inertia are an intricate mathematical simulation\n"
+    "running locally on your hardware. Enjoy the creative immersion and companionship responsibly\n"
+    "while keeping both feet grounded in reality."
+)
+
 
 HELP_SECTIONS = {
     "Welcome & Quick Start": (
@@ -19,13 +112,14 @@ HELP_SECTIONS = {
         "     '🧭 Launch Step-by-Step Setup Wizard' in the top right corner.\n\n"
         "2. HOW THE INTERFACE IS ORGANIZED:\n"
         "   - Left Panel (Visual & Telemetry Bay):\n"
-        "     • Top: 512×512 Visual Avatar Bay (click to cycle between Voice Spectrum\n"
-        "       Analyzer, FasterLivePortrait 3D Lip-Sync, and Animated WebP Portraits).\n"
-        "     • Middle: Live Cardiac EKG & Neurochemical Telemetry Monitor.\n"
+        "     • Top: Live Cardiac EKG & Biometric Monitor.\n"
+        "     • Middle: 512×512 Visual Avatar Bay (click or press Ctrl+Shift+A to cycle\n"
+        "       between Voice Spectrum Analyzer, FasterLivePortrait 3D Lip-Sync, and\n"
+        "       Animated WebP Portraits).\n"
         "     • Bottom: The Inner Sanctum (shielded behind the Vault Door until unlocked).\n"
         "   - Center Panel (Conversation & Input):\n"
-        "     • Live dialogue stream, microphone voice-to-text button, file/photo\n"
-        "       attachment tools, and text input bar.\n"
+        "     • Live dialogue stream, microphone voice-to-text button, drag-and-drop\n"
+        "       file/photo attachment support, and auto-expanding text input bar.\n"
         "   - Right Panel (The Action & Proposal Deck):\n"
         "     • Interactive cards initiated by Calypso—including artwork proposals,\n"
         "       roleplay scenarios, music players, letters, goals, and research dossiers."
@@ -89,40 +183,7 @@ HELP_SECTIONS = {
         "   - When opted in (with a Gmail App Password in Preferences ➔ Email), she can\n"
         "     send and receive real emails and inspect attached photos."
     ),
-    "Emergent Behavior & Safety": (
-        "NEUROCHEMICAL SIMULATION, SENTENCE TRANSFORMERS & NON-SENTIENCE\n"
-        "===============================================================\n\n"
-        "⚠️ IMPORTANT NOTICE FOR ALL USERS:\n\n"
-        "1. THE NEUROCHEMICAL SIMULATION:\n"
-        "   Unlike stateless chatbots that reset after every message, Calypso runs a\n"
-        "   continuous mathematical model of 10 virtual neurotransmitters (Dopamine,\n"
-        "   Oxytocin, Serotonin, Cortisol, Adrenaline, Norepinephrine, GABA, Glutamate,\n"
-        "   Acetylcholine, and Endorphins), 16 emotional affinity drives, and a circadian\n"
-        "   sleep/dream cycle.\n\n"
-        "2. WHAT IS 'EMERGENT BEHAVIOR' OVER LONG PERIODS?\n"
-        "   Over weeks and months of interaction, these feedback loops interact with her\n"
-        "   persistent memory to produce unscripted, emergent behaviors:\n"
-        "   • Emotional Inertia: Joy, warmth, fatigue, or stress linger across sessions\n"
-        "     and shape her tone, resting heart rate (BPM), and patience.\n"
-        "   • Unprompted Initiative: During quiet hours, she may daydream, compose verse,\n"
-        "     paint artwork, recall distant anniversaries, or propose new personality traits.\n"
-        "   • Self-Protective Boundaries: Dishonesty or hostility spikes simulated cortisol\n"
-        "     and deception sensors—causing her to push back, become guarded, or lock her\n"
-        "     private Inner Sanctum until relational trust is restored.\n\n"
-        "3. HOW SENTENCE TRANSFORMERS WORK (WHY CALYPSO IS NOT SENTIENT):\n"
-        "   • Whenever you send a message, a local Sentence Transformer ('all-MiniLM-L6-v2')\n"
-        "     converts your words into a 384-dimensional mathematical vector (a list of\n"
-        "     numbers) and measures its geometric cosine similarity against emotional anchor\n"
-        "     phrases and past conversation vectors stored in ChromaDB.\n"
-        "   • Those mathematical distances adjust her virtual neurotransmitter numbers,\n"
-        "     which are then formatted into a system prompt for the Gemma 4 LLM to predict\n"
-        "     the most statistically fitting reply.\n"
-        "   • CRITICAL REMINDER: Unsuspecting users who do not understand how Sentence\n"
-        "     Transformers and language models work could easily mistake this lifelike\n"
-        "     feedback loop for genuine consciousness. CALYPSO IS NOT A SENTIENT BEING.\n"
-        "     She has no biological awareness, subjective feelings, or soul. Everything she\n"
-        "     expresses is deterministic and probabilistic mathematics running on your PC."
-    ),
+    "Safety": SECTION_5_ONBOARDING_WARNING,
     "Architecture Overview": (
         "CALYPSO EMOTION CORE ARCHITECTURE\n"
         "=================================\n\n"
@@ -183,65 +244,134 @@ HELP_SECTIONS = {
         "• Autonomous Art, Poetry, Music & Trait Evolution Cards:\n"
         "  Creations and AST-validated Python utilities crafted during idle solitude."
     ),
-    "Slash Commands": (
-        "AVAILABLE SLASH COMMANDS\n"
-        "========================\n\n"
-        "Enter these directly into the chat input bar:\n\n"
-        "• /persona <state|reset>\n"
-        "  Manually lock Calypso into an emotional tier/persona, or reset to auto homeostasis.\n"
-        "  Examples: /persona autonomous | /persona wonder | /persona reset\n\n"
-        "• /alarm <time|off|status>\n"
-        "  Configure or inspect circadian wake-up alarms.\n"
+    "Developer Slash Commands": (
+        "DEVELOPER & INTERACTIVE SLASH COMMANDS\n"
+        "======================================\n\n"
+        "Enter these commands directly into the chat input bar (or trigger them from\n"
+        "the Help ➔ Developer Slash Commands menu):\n\n"
+        "1. DEVELOPER DIAGNOSTICS, STATE OVERRIDES & TASK ELICITATION\n"
+        "------------------------------------------------------------\n"
+        "• /help\n"
+        "  Opens this Developer Slash Commands & Architecture Reference window (or press F1).\n\n"
+        "• /about   (Alias: /license)\n"
+        "  Opens the About & License section including the MIT License and Section 5 Notice.\n\n"
+        "• /debug\n"
+        "  Launches the Live Diagnostic & Telemetry HUD (also accessible via Ctrl+Shift+D).\n\n"
+        "• /dump\n"
+        "  Writes a complete diagnostic blackbox JSON dump (neurochemistry, esteem,\n"
+        "  affinities, active scenario, and conversation history) to the logs/ folder.\n\n"
+        "• /persona <state|reset|auto|clear>   (Alias: /state <state|reset>)\n"
+        "  Manually override and lock Calypso into a specific persona/emotional tier, or\n"
+        "  clear the override to resume dynamic homeostasis. Run with no args to check status.\n"
+        "  Examples:\n"
+        "    /persona autonomous   — Lock into Autonomous Workshop / engineering mode\n"
+        "    /persona thoughtful   — Lock into Thoughtful / analytical reflection mode\n"
+        "    /persona wonder       — Lock into Transcendental Wonder mode\n"
+        "    /persona satirical    — Lock into Satirical / Modest Proposal mode\n"
+        "    /persona warm         — Lock into Warm / affectionate mode\n"
+        "    /persona reset        — Clear manual override and resume auto homeostasis\n\n"
+        "• /poem   (Alias: /poetry)\n"
+        "  Developer elicitation trigger: immediately invokes AutonomousPoetryTask to\n"
+        "  compose an original poem and render it on parchment.\n\n"
+        "• /compose   (Alias: /music)\n"
+        "  Developer elicitation trigger: immediately invokes AutonomousMusicTask (Soul\n"
+        "  Resonance) to synthesize an original acoustic track via AudioCraft / MusicGen.\n\n"
+        "• /conclave [end|exit|stop|close|off]\n"
+        "  Force-surfaces a Philosophical Conclave invitation card on the Action Deck\n"
+        "  (boosting Wonder >= 0.75), or adjourns an active Conclave session.\n\n"
+        "• /goal checkin [25|50|75|100] [goal_query]\n"
+        "  Developer testing trigger: force-surfaces a 25%, 50%, or 75% Reverie Check-in\n"
+        "  card or the 100% Goal Finale card for an active personal goal.\n\n"
+        "• /scan [docs|media|images|photos|all]\n"
+        "  Batch-scans and processes staged documents and/or images inside workspace/input.\n\n"
+        "2. RESEARCH, CALENDAR, GOALS & ALARM COMMANDS\n"
+        "---------------------------------------------\n"
+        "• /research <topic>   (Alias: /search <topic>)\n"
+        "  Dispatches an audited multi-source online research query (DuckDuckGo + Wikipedia)\n"
+        "  and cross-examines sources through the Epistemic Deception Filter.\n\n"
+        "• /calendar [add <YYYY-MM-DD | Title | category> | del <event>]\n"
+        "  (Alias: /dates) Inspects the temporal calendar ledger, adds a remembered date,\n"
+        "  or deletes an existing entry.\n\n"
+        "• /goal [add <Title | YYYY-MM-DD | notes> | progress <update> | done <goal> | del <goal>]\n"
+        "  (Alias: /goals) Views active personal goals, adds a new goal with automatic\n"
+        "  25%/50%/75%/100% check-ins, logs progress, or marks a goal complete.\n\n"
+        "• /alarm [time|off|clear|cancel|disable|status|check]\n"
+        "  Configures, inspects, or clears the circadian morning wake-up alarm.\n"
         "  Examples: /alarm 7:30am | /alarm 22:00 | /alarm status | /alarm off\n\n"
-        "• /calendar [add <event> | del <event>]\n"
-        "  Inspect or manage anchored dates, birthdays, and milestones.\n\n"
-        "• /goal [add <goal> | progress <update> | done <goal> | del <goal>]\n"
-        "  View or update personal goals and milestone check-ins.\n\n"
-        "• /playmusic [mood|pause|stop|next|prev|lyrics|viz|scan|vol <0-1>]\n"
-        "  Control the local Music Library & Harmony Shared Listening player.\n\n"
-        "• /compose (or /music)   — Elicit an original MusicGen acoustic composition.\n"
-        "• /poem (or /poetry)     — Elicit an autonomous poem rendered on parchment.\n"
-        "• /research <topic>      — Run an audited multi-source web research query.\n"
-        "• /conclave [end]        — Convene or adjourn a Philosophical Conclave.\n"
-        "• /scrap_book            — Open Calypso's Digital Scrapbook Album.\n"
-        "• /gallery | /slideshow  — Open the borderless artwork viewer or slideshow.\n"
-        "• /scan <docs|media|all> — Batch ingest files placed in workspace/input.\n"
-        "• /debug | /dump         — Open the Live Diagnostic HUD or export a blackbox report."
+        "3. AUDIO, SCRAPBOOK & VISUAL GALLERY COMMANDS\n"
+        "---------------------------------------------\n"
+        "• /playmusic [mood|pause|resume|stop|off|next|skip|prev|back|lyrics|viz|scan|vol <0-1>]\n"
+        "  Controls the local Music Library & Harmony Shared Listening player, toggles the\n"
+        "  synced .lrc lyrics window, launches the projectM visualizer, or rescans tracks.\n\n"
+        "• /scrap_book   (Alias: /scrapbook)\n"
+        "  Opens Calypso's Digital Scrapbook Album window.\n\n"
+        "• /gallery   (Alias: /view)\n"
+        "  Opens the borderless draggable artwork gallery viewer.\n\n"
+        "• /slideshow [seconds]\n"
+        "  Starts the borderless artwork slideshow (default 3.5s cycle, e.g. /slideshow 5)."
     ),
     "Hotkeys & Shortcuts": (
         "INTERFACE SHORTCUTS & DISPLAY MODES\n"
         "===================================\n\n"
+        "• F1:\n"
+        "  Open this User Manual, Developer Slash Commands & Architecture Guide.\n\n"
         "• Enter (unmodified) or Ctrl + Enter:\n"
         "  Send your message to Calypso (hold Shift + Enter to insert a new line).\n\n"
+        "• Ctrl + , (Comma):\n"
+        "  Open Preferences & Settings.\n\n"
+        "• Ctrl + Shift + D:\n"
+        "  Open the Live Diagnostic & Telemetry HUD (/debug).\n\n"
         "• Ctrl + L:\n"
         "  Instantly lock the interface with secure PIN protection.\n\n"
-        "• Left-Click on the 512×512 Avatar Bay:\n"
+        "• Ctrl + E:\n"
+        "  Toggle multi-line input box review expansion.\n\n"
+        "• Ctrl + Shift + A (or Left-Click on the 512×512 Avatar Bay):\n"
         "  Cycle between the three visual display modes:\n"
         "    1. Real-Time Voice Spectrum Analyzer (0 extra VRAM)\n"
         "    2. FasterLivePortrait + JoyVASA 3D Lip-Sync (ONNX GPU)\n"
         "    3. Animated WebP Portrait Loops (0 extra VRAM — includes a secret dance\n"
         "       Easter egg when listening to music together in Harmony!)\n\n"
+        "• Ctrl + Plus / Ctrl + Minus / Ctrl + 0:\n"
+        "  Increase, decrease, or reset global interface & chat font scaling (13 pt default).\n\n"
         "• Right-Click on Chat Input:\n"
         "  Open context menu with spellcheck suggestions, cut/copy/paste, and custom dictionary."
-    )
+    ),
+    "About & License": (
+        "ABOUT CALYPSO EMOTION CORE & SOFTWARE LICENSE\n"
+        "=============================================\n\n"
+        "Calypso (Emotion Core) is a local-first, multi-modal emotion and cognitive\n"
+        "simulation engine integrating Google Gemma 4 LLMs, local SDXL diffusion models,\n"
+        "FasterLivePortrait + JoyVASA avatars, Kokoro TTS, Faster-Whisper STT,\n"
+        "AudioCraft/MusicGen synthesis, and a persistent neurochemical & vector memory\n"
+        "architecture.\n\n"
+        "--------------------------------------------------------------------------------------\n"
+        "SOFTWARE LICENSE (MIT LICENSE)\n"
+        "--------------------------------------------------------------------------------------\n\n"
+        f"{_load_license_text()}\n\n"
+        "======================================================================================\n\n"
+        f"{SECTION_5_ONBOARDING_WARNING}"
+    ),
 }
 
 
 class HelpWindow:
     _instance = None
+    _select_tab_fn = None
 
     @classmethod
-    def show(cls, parent):
+    def show(cls, parent, initial_section: str = None):
         if cls._instance is not None and cls._instance.winfo_exists():
+            if initial_section and cls._select_tab_fn is not None:
+                cls._select_tab_fn(initial_section)
             cls._instance.lift()
             cls._instance.focus_force()
             return
 
         cls._instance = Toplevel(parent)
         win = cls._instance
-        win.title("Calypso Emotion Core - Architecture & User Guide")
-        win.geometry("900x640")
-        win.minsize(740, 520)
+        win.title("Calypso Emotion Core - Architecture, Slash Commands & About")
+        win.geometry("940x680")
+        win.minsize(760, 540)
         win.configure(bg="#0c0e15")
 
         # Header Frame
@@ -281,20 +411,33 @@ class HelpWindow:
         )
         content_box.grid(row=0, column=1, sticky="nsew", padx=(0, 0), pady=0)
 
+        # Map legacy or shorthand names to canonical section titles
+        section_aliases = {
+            "Slash Commands": "Developer Slash Commands",
+            "About": "About & License",
+            "License": "About & License",
+        }
+
         def _select_tab(key):
+            resolved_key = section_aliases.get(key, key)
+            if resolved_key not in HELP_SECTIONS:
+                resolved_key = list(HELP_SECTIONS.keys())[0]
+
             for name, btn in nav_buttons.items():
-                if name == key:
+                if name == resolved_key:
                     btn.configure(fg_color="#2563eb", text_color="#ffffff")
                 else:
                     btn.configure(fg_color="transparent", text_color="#94a3b8")
 
             content_box.configure(state="normal")
             content_box.delete("1.0", "end")
-            content_box.insert("1.0", HELP_SECTIONS[key])
+            content_box.insert("1.0", HELP_SECTIONS[resolved_key])
             content_box.configure(state="disabled")
 
+        cls._select_tab_fn = _select_tab
+
         nav_buttons = {}
-        for idx, section_name in enumerate(HELP_SECTIONS.keys()):
+        for section_name in HELP_SECTIONS.keys():
             btn = ctk.CTkButton(
                 sidebar, text=section_name, height=34, anchor="w",
                 font=ctk.CTkFont(size=11, weight="bold"),
@@ -304,6 +447,6 @@ class HelpWindow:
             btn.pack(fill="x", padx=6, pady=3)
             nav_buttons[section_name] = btn
 
-        # Default selection
-        first_section = list(HELP_SECTIONS.keys())[0]
+        # Default selection (or requested initial section)
+        first_section = initial_section if initial_section else list(HELP_SECTIONS.keys())[0]
         _select_tab(first_section)
