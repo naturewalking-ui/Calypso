@@ -68,7 +68,7 @@ flowchart TD
 ### D. Autonomous Growth and Resonance
 - Calypso is not a static chatbot! She learns how you behave. If you become adversarial, she will defend herself. If you get stuck in a rut, she will try to cheer you up. Her personality is always evolving.
 - Calypso pays attention to your likes and interests and catalogs then for further exploration. If you have hobbies or just want to learn something new she will compliment and encourage your inquiry.
-- Calypso will about you and change over time, she will create new code to resonate with you. Depending how you interact. She will autonomously create new affinities that match your personality.
+- Calypso will learn about you and change over time. She will create new code that will change her own behavior to resonate with you. Depending how you interact, she will autonomously create new affinities that match your personality.
 ---
 
 ## 2. Multi-Modal Capabilities & Visual Interface
