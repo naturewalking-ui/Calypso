@@ -58,7 +58,7 @@ class config:
     
     # LLM Configuration (Ollama — Gemma 4 Series Only)
     OLLAMA_URL = "http://localhost:11434/api/chat"
-    MODEL_NAME = "gemma4:12b"
+    MODEL_NAME = ""
     VISION_MODEL = MODEL_NAME
     OLLAMA_OPTIONS = {
         "num_ctx": 32768,
